@@ -41,10 +41,8 @@ def get_go_module_dependencies():
             repository_url, repository_type = get_repository_url(module_url)
             print(f"- repository_url: {repository_url}")
 
-            license_url = license.get_license_url(repository_url, repository_type)
+            license_url, license_info = license.get_license(repository_url, repository_type)
             print(f"- license_url: {license_url}")
-
-            license_info = license.get_license_info(license_url)
             print(f"- license_info: {license_info}")
 
             if module_name and module_url:
