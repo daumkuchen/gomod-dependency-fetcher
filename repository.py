@@ -32,3 +32,29 @@ def get_repository_url(module_url):
     except requests.exceptions.RequestException as e:
         print(f"Error fetching repository URL from {module_url}: {e}")
         return "-", "-"
+    
+
+def get_license_url_and_info(module_url):
+    try:
+        response = requests.get(module_url)
+        response.raise_for_status()
+
+        soup = BeautifulSoup(response.text, 'html.parser')
+
+        result = soup.find("span", {
+            "class": "go-Main-headerDetailItem",
+            "data-test-id": "UnitHeader-licenses"
+        })
+
+        if result:
+            a_tag = result.find("a")
+            if a_tag:
+                url = f"https://pkg.go.dev{a_tag['href']}"
+                info = a_tag.text
+                return url, info
+
+        return "-", "-"
+    
+    except requests.exceptions.RequestException as e:
+        print(f"Error fetching repository URL from {module_url}: {e}")
+        return "-", "-"

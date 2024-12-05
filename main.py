@@ -37,16 +37,21 @@ def get_go_module_dependencies():
             module_url = f"https://pkg.go.dev/{module_name}" if module_name else None
             print(f"- module_url: {module_url}")
 
-            repository_url, repository_type = repository.get_repository_url(module_url)
-            print(f"- repository_url: {repository_url}")
-            print(f"- repository_type: {repository_type}")
+            # repository_url, repository_type = repository.get_repository_url(module_url)
+            # print(f"- repository_url: {repository_url}")
+            # print(f"- repository_type: {repository_type}")
 
-            license_url, license_info = license.get_license_url(repository_url, repository_type)
+            # license_url, license_info = license.get_license_url(repository_url, repository_type)
+            # print(f"- license_url: {license_url}")
+            # print(f"- license_info: {license_info}")
+
+            license_url, license_info = repository.get_license_url_and_info(module_url)
             print(f"- license_url: {license_url}")
             print(f"- license_info: {license_info}")
 
             if module_name and module_url:
-                dependencies.append((module_name, module_url, repository_url, license_url, license_info))
+                # dependencies.append((module_name, module_url, repository_url, license_url, license_info))
+                dependencies.append((module_name, module_url, license_url, license_info))
 
             while pos < len(raw_output) and raw_output[pos].isspace():
                 pos += 1
