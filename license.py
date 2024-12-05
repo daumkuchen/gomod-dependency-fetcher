@@ -4,7 +4,8 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-def get_license(repository_url, repository_type):
+
+def get_license_url(repository_url, repository_type):
     try:
         if repository_url == '-':
             return '-', '-'
